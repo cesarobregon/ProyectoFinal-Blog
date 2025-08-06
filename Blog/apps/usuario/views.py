@@ -5,6 +5,11 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import DetailView
+from django.views.generic.edit import UpdateView
+
+from .models import Usuario
 
 # Create your views here.
 
@@ -38,3 +43,22 @@ class LogoutUsuario(LogoutView):
     def dispatch(self, request, *args, **kwargs):
         messages.success(self.request, 'Logout exitoso')
         return super().dispatch(request, *args, **kwargs)
+    
+
+class PerfilUsuario(LoginRequiredMixin, DetailView):
+    model = Usuario
+    template_name = 'usuarios/perfil.html'
+    context_object_name = 'usuario'
+
+    def get_object(self):
+        return self.request.user
+
+
+class EditarPerfil(LoginRequiredMixin, UpdateView):
+    model = Usuario
+    template_name = 'usuarios/editar_perfil.html'
+    fields = ['first_name', 'last_name', 'email']  # Campos editables
+    success_url = reverse_lazy('usuario:perfil') 
+
+    def get_object(self):
+        return self.request.user
