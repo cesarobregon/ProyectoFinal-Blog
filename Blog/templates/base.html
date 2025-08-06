@@ -100,6 +100,16 @@
 						<li><a href="#">Categorías</a></li>
 						<li><a href="#">Acerca de</a></li>
 						<li><a href="#">Contacto</a></li>
+						{% if user.is_authenticated %}
+						<li><a href="#">Mi Perfil</a></li>
+						<li><form action="{% url 'apps.usuario:logout' %}" method="post" style="display:inline;">
+    							{% csrf_token %}
+    							<button type="submit" style="background: none; border: none; color: inherit; font: inherit;">Cerrar sesión</button>
+  							</form></li>
+						<!--<li><a href="{% url 'apps.usuario:logout' %}">Cerrar Sesion</a></li>-->
+						{% else %}
+						<li><a href="{% url 'apps.usuario:login' %}">Iniciar Sesion</a></li>
+						{% endif %}
 					</ul>
 					</nav>
 				

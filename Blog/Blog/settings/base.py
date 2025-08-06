@@ -28,6 +28,11 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 #DEBUG = True
 #ALLOWED_HOSTS = ['*']
 
+AUTH_USER_MODEL = 'usuario.Usuario'
+
+LOGIN_REDIRECT_URL = '/'
+
+
 
 # Application definition
 
@@ -40,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'apps.articulos',
+    'apps.usuario',
 ]
 
 MIDDLEWARE = [

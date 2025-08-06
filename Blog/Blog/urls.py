@@ -15,12 +15,10 @@ from django.contrib.auth import views as auth
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    
     path('', views.Home, name = "path_home"),
-    
-    
     path('Articulos/', include('articulos.urls')), 
-
+    path('', include('apps.usuario.urls')), 
+    path('', include('django.contrib.auth.urls')), 
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)   
 
