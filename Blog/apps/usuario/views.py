@@ -8,6 +8,9 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView
 from django.views.generic.edit import UpdateView
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from django.contrib.auth.models import Group
 
 from .models import Usuario
 
@@ -19,7 +22,9 @@ class registrarUsuario(CreateView):
     
     def form_valid(self,form):
         messages.success(self.request, 'Registro Exitoso. Por favor, inicia sesion')
-        form.save()
+        usuario = form.save()
+        grupo_miembro, _ = Group.objects.get_or_create(name='Miembro')
+        usuario.groups.add(grupo_miembro) 
         
         return redirect('apps.usuario:login')
 
@@ -62,3 +67,11 @@ class EditarPerfil(LoginRequiredMixin, UpdateView):
 
     def get_object(self):
         return self.request.user
+
+@login_required
+def perfil(request):
+    return render(request, 'usuarios/perfil.html', {'usuario': request.user})
+
+@login_required
+def editar_perfil(request):
+    return render(request, 'usuarios/editar_perfil.html', {'usuario': request.user})

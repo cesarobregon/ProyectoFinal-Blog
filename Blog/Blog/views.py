@@ -2,7 +2,8 @@
 
 from django.shortcuts import render
 
-from articulos.models import Articulo
+from apps.articulos.models import Articulo
+
 
 def Home(request):       
     
