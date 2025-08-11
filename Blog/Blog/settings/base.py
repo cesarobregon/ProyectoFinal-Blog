@@ -31,6 +31,9 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 AUTH_USER_MODEL = 'usuario.Usuario'
 
 LOGIN_REDIRECT_URL = '/'
+# Redirección al formulario de login
+LOGIN_URL = '/login/'
+
 
 
 

@@ -5,7 +5,10 @@
 
 {% block contenido_cuerpo %}
 
-    <a href="{% url 'articulos:path_crear_articulo' %}">CREAR NUEVO ARTICULO</a>
+    {% if es_moderador %}
+    <a href="{% url 'articulos:path_crear_articulo' %}">Crear artículo</a>
+    {% endif %}
+
     <h1>LISTA DE ARTICULOS</h1>
 
     <section class="posts">

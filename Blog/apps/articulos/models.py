@@ -21,3 +21,6 @@ class Articulo(models.Model):    #Son clases en Python que se van a relacionar c
     def __str__(self):   #Esto es para que cuando yo vea un producto, lo vea a través del nombre
         
         return self.nombre
+    
+    def MisComentarios(self):
+        return self.comentario_set.all()
