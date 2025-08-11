@@ -37,14 +37,22 @@
            
 
 
+            
+
             <ul class="lista-comentarios">
                 {% for comentario in articulo.MisComentarios %}
-    
                     <li>
                         <p>{{ comentario.texto }}</p>
-                        <small>Por: {{ comentario.usuario }} - {{ comentario.creado|date:"d/m/Y" }}</small>
+                        <small>
+                            Por: {{ comentario.usuario }} - {{ comentario.creado|date:"d/m/Y" }}
+                        </small>
+
+                        {% if request.user == comentario.usuario or es_moderador %}
                             <a href="{% url 'apps.comentarios:path_eliminar' comentario.pk %}?orden={{ request.GET.orden }}" class="boton-eliminar">Eliminar</a>
-                            <span> <a class ='boton-editar' href="{% url 'apps.comentarios:path_editar' comentario.pk %}?orden={{ request.GET.orden }}">Editar</a></span>
+                            <span>
+                                <a class="boton-editar" href="{% url 'apps.comentarios:path_editar' comentario.pk %}?orden={{ request.GET.orden }}">Editar</a>
+                            </span>
+                        {% endif %}
                     </li>
                 {% empty %}
                     <li class="no-comentarios">No hay comentarios todavía.</li>

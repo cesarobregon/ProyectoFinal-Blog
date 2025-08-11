@@ -40,7 +40,7 @@ def ConfirmarEliminar(request, pk, articulo_pk):
                 return HttpResponseRedirect(f'{redirect_url}?orden={orden}')
             return HttpResponseRedirect(redirect_url)
         else:
-            return HttpResponseForbidden("No tienes permiso para eliminar este comentario.")
+            return HttpResponseForbidden("No tienes permiso para eliminar este comentario. <a href='javascript:window.history.back();'>Volver</a>")
 
 @login_required
 def Eliminar(request, pk):
@@ -48,11 +48,11 @@ def Eliminar(request, pk):
     orden = request.GET.get('orden', '')
 
     if request.user != comentario.usuario and not es_moderador(request.user):
-        return HttpResponseForbidden("No tienes permiso para eliminar este comentario.")
+        return HttpResponseForbidden("No tienes permiso para eliminar este comentario. <a href='javascript:window.history.back();'>Volver</a>")
 
     contexto = {
         'comentario': comentario,
-        'orden': orden
+        'orden': orden,
     }
     return render(request, "comentarios/confirmar_eliminar.html", contexto)
 
@@ -62,11 +62,11 @@ def Editar(request, pk):
     orden = request.GET.get('orden', '')
 
     if request.user != comentario.usuario and not es_moderador(request.user):
-        return HttpResponseForbidden("No tienes permiso para editar este comentario.")
+        return HttpResponseForbidden("No tienes permiso para editar este comentario. <a href='javascript:window.history.back();'>Volver</a>")
 
     contexto = {
         'comentario': comentario,
-        'orden': orden
+        'orden': orden,
     }
     return render(request, 'comentarios/confirmar_edicion.html', contexto)
 
@@ -77,7 +77,7 @@ def ConfirmarEditar(request, pk):
     articulo_pk = comentario.articulo.pk
 
     if request.user != comentario.usuario and not es_moderador(request.user):
-        return HttpResponseForbidden("No tienes permiso para editar este comentario.")
+        return HttpResponseForbidden("No tienes permiso para editar este comentario. <a href='javascript:window.history.back();'>Volver</a>")
 
     if request.method == 'POST':
         nuevo_texto = request.POST.get('comentario', None)
@@ -90,4 +90,4 @@ def ConfirmarEditar(request, pk):
                 return HttpResponseRedirect(f'{redirect_url}?orden={orden}')
             return HttpResponseRedirect(redirect_url)
     else:
-        return HttpResponseForbidden("No tienes permiso para editar este comentario.")
+        return HttpResponseForbidden("No tienes permiso para editar este comentario. <a href='javascript:window.history.back();'>Volver</a>")

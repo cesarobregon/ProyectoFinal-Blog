@@ -51,6 +51,10 @@ class Detalle_Articulo(DetailView):
             comentarios = comentarios.order_by('-creado')
         
         context['comentarios'] = comentarios
+        context['es_moderador'] = (
+            self.request.user.is_authenticated
+            and self.request.user.groups.filter(name='Moderador').exists()
+        )
         return context
 
 
