@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block contenido_cuerpo %}
+
+    <h1>Editar Artículo</h1>
+
+    <div class="actions">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Editar</button>
+        </form>
+    </div>
+
+{% endblock contenido_cuerpo %}

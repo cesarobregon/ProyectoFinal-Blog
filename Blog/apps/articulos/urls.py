@@ -2,6 +2,8 @@
 from django.urls import path
 from . import views
 
+
+
 app_name = "apps.articulos"
 
 urlpatterns = [
@@ -14,6 +16,10 @@ urlpatterns = [
     
     
     path('Crear/', views.Crear_Articulo.as_view(), name = 'path_crear_articulo'),   #Esto es una opcion para crear articulos
+    
+    path('Editar/<int:pk>', views.EditarArticuloView.as_view(), name='path_editar_articulo'),
+    
+    path('Eliminar/<int:pk>', views.EliminarArticuloView.as_view(), name='path_eliminar_articulo'),
     
 
 ]

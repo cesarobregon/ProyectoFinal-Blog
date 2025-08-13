@@ -1,6 +1,7 @@
 
 
 
+
 /* Reset básico para márgenes y paddings */
 * {
   margin: 0;
@@ -15,6 +16,7 @@ body {
   color: #333;
   line-height: 1.6;
   font-size: 16px;
+  margin: 0;          /* ⬅ evita espacios por defecto */
 }
 
 /* Contenedor principal */
@@ -492,12 +494,18 @@ p, li {
 
 /* Sombra y borde sutil para sidebar */
 #sidebar {
-  background: #f9f9f9;
-  border-left: 1px solid #ddd;
-  padding: 1rem;
-  border-radius: 0 5px 5px 0;
-  box-shadow: inset 0 0 8px rgba(0,0,0,0.05);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 220px;
+    height: 100%;
+    background-color: #222;
+    color: white;
+    padding-top: 20px;
+    margin: 0;          /* ⬅ importante */
+    border: none;       /* ⬅ asegura que no tenga borde */
 }
+
 
 /* Links menú lateral */
 #menu ul li a {
@@ -1146,4 +1154,64 @@ img:hover {
     z-index: 1002;
     transition: width 0.2s ease-out;
     box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Barra lateral fija */
+#sidebar {
+    position: fixed;      /* fija la posición */
+    top: 0;
+    left: 0;
+    width: 220px;         /* ancho de la barra */
+    height: 100%;         /* ocupa toda la altura */
+    background-color: #222;
+    color: white;
+    padding-top: 20px;
+    overflow-y: auto;     /* scroll si el contenido es muy largo */
+    z-index: 1000;        /* encima del contenido */
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#sidebar ul li {
+    padding: 10px 20px;
+}
+
+#sidebar ul li a,
+#sidebar ul li button {
+    color: white;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    text-align: left;
+}
+
+#sidebar ul li a:hover,
+#sidebar ul li button:hover {
+    background-color: #444;
+}
+
+#main {
+    margin-left: 130px; /* sigue siendo el ancho del sidebar */
+    padding: 20px;
+    max-width: calc(100% - 220px); /* ocupa todo menos el sidebar */
 }

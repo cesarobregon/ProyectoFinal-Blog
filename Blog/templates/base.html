@@ -3,11 +3,7 @@
 {% load static %}
 
 <!DOCTYPE HTML>
-<!--
-	Editorial by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+
 <html>
 	<head>
 		<title>BLOG</title>
@@ -36,7 +32,7 @@
 
 							<div>
 								<p style="font-size: 0.9rem; margin: 0; color: #999;"><strong>Informatorio 2025</strong> </p>
-								<a href="#" class="logo" style="font-size: 2rem;"><strong>(NOMBRE DEL SITIO)</strong></a>
+								<a href="#" class="logo" style="font-size: 2rem;"><strong> TechVisión </strong></a>
 							</div>
 
 							<ul class="icons">
@@ -88,45 +84,30 @@
 					</div>
 				</div>
 
-				<!--  Esto es para el styles_new -->
-				<div>
-					<!-- Botón para abrir el sidebar -->
-					<button id="sidebarToggle">☰ Menú</button>
 
-					<!-- Sidebar oculto -->
-					<nav id="sidebar">
+				<nav id="sidebar">
 					<ul>
 						<li><a href="{% url 'path_home' %}">Inicio</a></li>
 						<li><a href="#">Categorías</a></li>
 						<li><a href="#">Acerca de</a></li>
 						<li><a href="#">Contacto</a></li>
 						{% if user.is_authenticated %}
-						<li><a href="{% url 'usuario:perfil' %}">Mi perfil</a></li>
-						<li><form action="{% url 'apps.usuario:logout' %}" method="post" style="display:inline;">
-    							{% csrf_token %}
-    							<button type="submit" style="background: none; border: none; color: inherit; font: inherit;">Cerrar sesión</button>
-  							</form></li>
-						<!--<li><a href="{% url 'apps.usuario:logout' %}">Cerrar Sesion</a></li>-->
+							<li><a href="{% url 'usuario:perfil' %}">Mi perfil</a></li>
+							<li>
+								<form action="{% url 'apps.usuario:logout' %}" method="post" style="display:inline;">
+									{% csrf_token %}
+									<button type="submit" style="background: none; border: none; color: inherit;">Cerrar sesión</button>
+								</form>
+							</li>
 						{% else %}
-						<li><a href="{% url 'apps.usuario:login' %}">Iniciar Sesion</a></li>
+							<li><a href="{% url 'apps.usuario:login' %}">Iniciar Sesión</a></li>
 						{% endif %}
 					</ul>
-					</nav>
-				
-				</div>
+				</nav>
+
 
 		</div>
 
-		<!-- Esto es para el styles_new -->
-			
-			<script>
-			const toggle = document.getElementById('sidebarToggle');
-			const sidebar = document.getElementById('sidebar');
-
-			toggle.addEventListener('click', () => {
-				sidebar.classList.toggle('active');
-			});
-			</script>
 		
 		<script src="{% static 'js/scroll-handler.js' %}"></script>	
 	</body>

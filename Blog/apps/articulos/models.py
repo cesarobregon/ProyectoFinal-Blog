@@ -18,9 +18,24 @@ class Articulo(models.Model):    #Son clases en Python que se van a relacionar c
     descripcion = models.CharField(max_length=1000)
     imagen = models.ImageField(upload_to = 'articulos')     #Esto significa que las imagenes van a estar en una carpeta llamada articulos
     
+    fecha_publicacion = models.DateTimeField(auto_now_add=True)
+
+    
+    destacado = models.BooleanField(
+        default=False,
+        help_text="Marcar esta casilla para que el articulo sea el destacado en el home."
+    )
+    
     def __str__(self):   #Esto es para que cuando yo vea un producto, lo vea a través del nombre
         
         return self.nombre
     
     def MisComentarios(self):
         return self.comentario_set.all()
+    
+    
+    def save(self, *args, **kwargs):
+        super_guardar = super().save
+        if self.destacado:
+            Articulo.objects.exclude(pk=self.pk).update(destacado=False)
+        super_guardar(*args, **kwargs)

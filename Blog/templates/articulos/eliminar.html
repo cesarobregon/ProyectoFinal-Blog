@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block contenido_cuerpo %}
+
+<div class="confirmacion-eliminar">
+    <h2>Confirmar eliminación</h2>
+
+    <p>¿Estás seguro que deseas eliminar este artículo?</p>
+
+    <div class="articulo-info">
+        <h3>{{ object.titulo }}</h3>
+        <p>{{ object.contenido|truncatewords:30 }}</p>
+        <small>Publicado el {{ object.fecha_publicacion|date:"d/m/Y" }}</small>
+    </div>
+
+    <div class="botones">
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn-danger">Sí, eliminar</button>
+        </form>
+        <a href="{% url 'articulos:path_listar_articulos' %}" class="btn-secondary">Cancelar</a>
+    </div>
+</div>
+
+{% endblock contenido_cuerpo %}

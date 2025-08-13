@@ -10,6 +10,11 @@ from .models import Articulo            #Esto es necesario para traer lo que est
 from .forms import FormularioCrearArticulo
 
 
+from django.contrib import messages     #Todo esto es para el boton de editar
+from django.shortcuts import redirect
+from django.urls import reverse
+
+
 class soloMod(UserPassesTestMixin):
     def test_func(self):
         return self.request.user.is_authenticated and self.request.user.groups.filter(name='Moderador').exists()
@@ -21,7 +26,7 @@ class soloMod(UserPassesTestMixin):
 
 
 def Listar_Articulos(request):
-    todos = Articulo.objects.all()
+    todos = Articulo.objects.all().order_by('-fecha_publicacion')  # ⬅️ Ordena del más nuevo al más viejo
     es_moderador = request.user.is_authenticated and request.user.groups.filter(name='Moderador').exists()
     return render(request, 'articulos/listar.html', {
         'articulos': todos,
@@ -63,6 +68,25 @@ class Crear_Articulo(soloMod, CreateView):
     model = Articulo
     template_name = 'articulos/crear.html'
     form_class = FormularioCrearArticulo
+    success_url = reverse_lazy('articulos:path_listar_articulos')
+    
+
+
+class EditarArticuloView(UpdateView):
+    model = Articulo
+    form_class = FormularioCrearArticulo
+    template_name = 'articulos/editar.html'
+
+    def get_success_url(self):
+        return reverse('articulos:path_detalle_articulo', kwargs={'pk': self.object.pk})
+    
+    
+
+
+
+class EliminarArticuloView(DeleteView):
+    model = Articulo
+    template_name = 'articulos/eliminar.html'
     success_url = reverse_lazy('articulos:path_listar_articulos')
     
     

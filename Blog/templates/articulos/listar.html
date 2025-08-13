@@ -39,8 +39,8 @@
                 <div class="actions">
                     <a href="{% url 'articulos:path_detalle_articulo' articulo.pk %}" class="button"> Ver más </a>
                     {% if es_moderador %}
-                     <a href="#" class="button" style="background-color: green; ">Editar</a>
-                     <a href="#" class="button" style="background-color: red;">Eliminar</a>
+                     <a href="{% url 'articulos:path_editar_articulo' articulo.pk %}" class="button" style="background-color: green; ">Editar</a>
+                     <a href="{% url 'articulos:path_eliminar_articulo' articulo.pk %}" class="button" style="background-color: red;">Eliminar</a>
                     {% endif %}
                 </div>
             </article>
