@@ -28,11 +28,10 @@
 					<div class="inner">
 
 					<!-- Header -->
-						<header id="header" style="display: flex; align-items: center; justify-content: space-between;">
-
-							<div>
-								<p style="font-size: 0.9rem; margin: 0; color: #999;"><strong>Informatorio 2025</strong> </p>
-								<a href="#" class="logo" style="font-size: 2rem;"><strong> TechVisión </strong></a>
+						<header id="header">
+							<div class="brand">
+								<p class="brand-tag">Informatorio 2025</p>
+								<a href="{% url 'path_home' %}" class="logo">TechVisión</a>
 							</div>
 
 							<ul class="icons">
@@ -56,28 +55,16 @@
 							<div class="footer-contenedor">
 								<div class="footer-info">
 									<h3>Equipo del Proyecto</h3>
-									<p>Juan Pablo Bravo y colaboradores</p>
+									<p> • Bravo Juan Pablo</p>
+									<p> • Obregón Cesar Lautaro</p>
+									<p> • </p>
+									<p> • </p>
 								</div>
 
-								<div class="footer-contacto">
-									<ul>
-										<li><i class="fas fa-envelope"></i> <a href="#">informacion@untitled.tld</a></li>
-										<li><i class="fas fa-phone"></i> (000) 000-0000</li>
-										<li><i class="fas fa-map-marker-alt"></i> 1234 Somewhere Road #8254, Nashville</li>
-									</ul>
-								</div>
-
-								<div class="footer-redes">
-									<a href="#"><i class="fab fa-twitter"></i></a>
-									<a href="#"><i class="fab fa-facebook-f"></i></a>
-									<a href="#"><i class="fab fa-instagram"></i></a>
-									<a href="#"><i class="fab fa-snapchat-ghost"></i></a>
-									<a href="#"><i class="fab fa-medium-m"></i></a>
-								</div>
 							</div>
 
 							<div class="footer-copy">
-								<p>&copy; 2025 Informatorio. Imágenes: <a href="https://unsplash.com">Unsplash</a>. Plantilla: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								<p>&copy; 2025 Informatorio</a>.</p>
 							</div>
 						</footer>
 						
@@ -85,22 +72,44 @@
 				</div>
 
 
+				<!-- Sidebar -->
 				<nav id="sidebar">
+					<div class="sidebar-brand">TechVisión</div>
+
+					<div class="nav-section">Navegación</div>
 					<ul>
-						<li><a href="{% url 'path_home' %}">Inicio</a></li>
-						<li><a href="#">Categorías</a></li>
-						<li><a href="#">Acerca de</a></li>
-						<li><a href="#">Contacto</a></li>
+						<li>
+							<a href="{% url 'path_home' %}" 
+							class="{% if request.resolver_match.url_name == 'path_home' %}active{% endif %}">
+							<span class="nav-icon">🏠</span> Inicio
+							</a>
+						</li>
+						<li><a href="{% url 'categorias:lista_categorias' %}"><span class="nav-icon">🗂️</span>Categorías</a></li>
+						<li>
+							<a href="{% url 'acerca' %}" class="{% if request.resolver_match.url_name == 'acerca' %}active{% endif %}">
+								<span class="nav-icon">ℹ️</span> Acerca de
+							</a>
+						</li>
+						
+						<li>
+							<a href="{% url 'contacto' %}" class="{% if request.resolver_match.url_name == 'contacto' %}active{% endif %}">
+								<span class="nav-icon">✉️</span> Contacto
+							</a>
+						</li>
+
+
+
 						{% if user.is_authenticated %}
-							<li><a href="{% url 'usuario:perfil' %}">Mi perfil</a></li>
-							<li>
-								<form action="{% url 'apps.usuario:logout' %}" method="post" style="display:inline;">
-									{% csrf_token %}
-									<button type="submit" style="background: none; border: none; color: inherit;">Cerrar sesión</button>
-								</form>
-							</li>
+						<div class="nav-section">Cuenta</div>
+						<li><a href="{% url 'usuario:perfil' %}"><span class="nav-icon">👤</span> Mi perfil</a></li>
+						<li>
+							<form action="{% url 'apps.usuario:logout' %}" method="post">
+							{% csrf_token %}
+							<button type="submit"><span class="nav-icon">🚪</span> Cerrar sesión</button>
+							</form>
+						</li>
 						{% else %}
-							<li><a href="{% url 'apps.usuario:login' %}">Iniciar Sesión</a></li>
+						<li><a href="{% url 'apps.usuario:login' %}"><span class="nav-icon">🔐</span> Iniciar Sesión</a></li>
 						{% endif %}
 					</ul>
 				</nav>

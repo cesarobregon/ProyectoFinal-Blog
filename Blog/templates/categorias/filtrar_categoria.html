@@ -1,0 +1,20 @@
+{% extends "categorias/base_categorias.html" %}
+
+{% block title_categorias %}{{ categoria.nombre }}{% endblock %}
+
+{% block contenido_categorias %}
+  <h2>Artículos en {{ categoria.nombre }}</h2>
+
+  {% if articulos %}
+    <ul>
+      {% for art in articulos %}
+        <li>
+          {{ art.titulo }}
+          <small>– {{ art.creado|date:"d/m/Y" }}</small>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No hay artículos en esta categoría.</p>
+  {% endif %}
+{% endblock %}

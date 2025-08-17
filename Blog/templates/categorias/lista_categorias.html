@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block contenido_cuerpo %}
+<h1>Lista de Categorías</h1>
+<ul>
+    {% for cat in categorias %}
+        <li>
+            <a href="{% url 'categorias:filtrar_categoria' cat.id %}">
+                {{ cat.nombre }}
+            </a>
+        </li>
+    {% empty %}
+        <li>No hay categorías disponibles.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

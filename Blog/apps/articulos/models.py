@@ -1,5 +1,6 @@
 
 from django.db import models
+from apps.categorias.models import Categoria
 
 # Create your models here.
 
@@ -17,7 +18,7 @@ class Articulo(models.Model):    #Son clases en Python que se van a relacionar c
     nombre = models.CharField(max_length=100)   #En este tipo de dato es obligatorio poner la longitud máxima
     descripcion = models.CharField(max_length=1000)
     imagen = models.ImageField(upload_to = 'articulos')     #Esto significa que las imagenes van a estar en una carpeta llamada articulos
-    
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name="articulos")
     fecha_publicacion = models.DateTimeField(auto_now_add=True)
 
     
